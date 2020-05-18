@@ -4,16 +4,17 @@ Servo myservo2;
 Servo myservo3;
 Servo myservo4;
 int pos = 0; 
+int LED=12;
 void setup()
 {
   Serial.begin(9600);
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
+  pinMode(LED,OUTPUT);
   myservo1.attach(4);
   myservo2.attach(6);
   myservo3.attach(11);
-  myservo. attach(13);
-  
+  myservo4.attach(13);
 }
 
 void loop()
@@ -23,21 +24,12 @@ void loop()
    while(Serial.available())
    { A = Serial.read();}
   switch(A)
-  {  /* DC motor 1 is for shredding*/
+  {
     case '1':   digitalWrite(2,HIGH);
     			delay(2000);
     			digitalWrite(2,LOW);
-    			break;
-
-     /* DC motor 2 is for soil mixing*/
-    case '2':   digitalWrite(3,HIGH);
-    			delay(2000);  
-				digitalWrite(3,LOW);
-    			break;
-
-  /*servo motors for door purpose*/
-
-    case '3':	
+    			
+     
     			for (pos = 0; pos <= 90; pos += 1) 
                 {
     			  myservo1.write(pos); 
@@ -51,88 +43,26 @@ void loop()
                   delay(15);
   				}
     			break;
-
-    case '4' : for (pos = 0; pos <= 90; pos += 1) 
-                {
-    			  myservo1.write(pos); 
-                  myservo2.write(pos); 
-                  delay(15); 
-                }
-  				for (pos = 90; pos >= 0; pos -= 1) 
-                { 
-                  myservo1.write(pos);
-                  myservo2.write(pos);
-                  delay(15);
-  				}
-    			break;
-  }
-  digitalWrite(5,LOW);
-  digitalWrite(2,LOW);
-}
-#include <Servo.h>
-Servo myservo1; 
-Servo myservo2; 
-Servo myservo3;
-Servo myservo4;
-int pos = 0; 
-void setup()
-{
-  Serial.begin(9600);
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  myservo1.attach(4);
-  myservo2.attach(6);
-  myservo3.attach(11);
-  myservo. attach(13);
-  
-}
-
-void loop()
-{
-  
- char A ;
-   while(Serial.available())
-   { A = Serial.read();}
-  switch(A)
-  {  /* DC motor 1 is for shredding*/
-    case '1':   digitalWrite(2,HIGH);
-    			delay(2000);
-    			digitalWrite(2,LOW);
-    			break;
-
-     /* DC motor 2 is for soil mixing*/
-    case '2':   digitalWrite(3,HIGH);
-    			delay(2000);  
+    case '2':  digitalWrite(3,HIGH);
+    			 delay(10000); 
 				digitalWrite(3,LOW);
-    			break;
-
-  /*servo motors for door purpose*/
-
-    case '3':	
-    			for (pos = 0; pos <= 90; pos += 1) 
+    		
+        digitalWrite(LED,HIGH);
+        delay(3000);
+        digitalWrite(LED,LOW);
+        delay(3000);
+       
+    
+        for (pos = 0; pos <= 90; pos += 1) 
                 {
-    			  myservo1.write(pos); 
-                  myservo2.write(pos); 
+    			  myservo3.write(pos); 
+                  myservo4.write(pos); 
                   delay(15); 
                 }
   				for (pos = 90; pos >= 0; pos -= 1) 
                 { 
-                  myservo1.write(pos);
-                  myservo2.write(pos);
-                  delay(15);
-  				}
-    			break;
-
-    case '4' : for (pos = 0; pos <= 90; pos += 1) 
-                {
-    			  myservo1.write(pos); 
-                  myservo2.write(pos); 
-                  delay(15); 
-                }
-  				for (pos = 90; pos >= 0; pos -= 1) 
-                { 
-                  myservo1.write(pos);
-                  myservo2.write(pos);
+                  myservo3.write(pos);
+                  myservo4.write(pos);
                   delay(15);
   				}
     			break;
